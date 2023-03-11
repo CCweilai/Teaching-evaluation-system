@@ -2,6 +2,7 @@ package com.example.server.controller;
 
 import com.example.server.entity.Admin;
 import com.example.server.mapper.AdminMapper;
+import com.example.server.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,6 @@ public class AdminController {
     //查询全部
     @GetMapping("/admin")
     public List getAdmin(){
-        List<Admin> list = adminMapper.getAdmin();
-        System.out.println(list);
         return adminMapper.getAdmin();
     }
 

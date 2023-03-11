@@ -18,7 +18,7 @@ public class AdminService {
      */
     public Result register(Admin admin){
         Result result = new Result();
-        result.setSuccess(false);
+
         result.setData(null);
         try{
             Admin adminExist = adminMapper.selectByName(admin.getName());
@@ -28,7 +28,6 @@ public class AdminService {
             else{
                 adminMapper.register(admin);
                 result.setMessage("注册成功");
-                result.setSuccess(true);
                 result.setData(admin);
             }
         } catch (Exception e) {
@@ -37,9 +36,9 @@ public class AdminService {
             }
             return result;
     }
-   public Result login(Admin admin){
-        return null;
+   public Result login(Admin admin) {
+       return null;
 
-    }
+   }
 
 }

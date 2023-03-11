@@ -6,21 +6,66 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T> {
     /**
-     * 状态信息
-     */
-    private Boolean success; //状态信息
-    /**
      * 状态码
      */
     private Integer code;
     /**
-     * 提示信息
+     * 响应信息
      */
     private String message;
     /**
      * 结果数据
      */
     private T data;
+
+    public Result(){
+    }
+    public Result(Integer code,String message){
+        this.code=code;
+        this.message = message;
+    }
+    public Result(T data){
+        this.code = ResultCode.SUCCESS.getCode();
+        this.message = ResultCode.SUCCESS.getMessage();
+        this.data = data;
+    }
+    public Result (Integer code,String message,T data){
+        this.code=code;
+        this.data = data;
+        this.message=message;
+    }
+
+    public static <T> Result<T> setCommonStatusAndData(ResultCode resultCode, T data){
+        return new Result<>(resultCode.getCode(), resultCode.getMessage(),data);
+    }
+
+    public static Result setCommonStatusNoData(ResultCode resultCode){
+        return new Result<>(resultCode.getCode(), resultCode.getMessage());
+    }
+
+    public static <T> Result<T> success(T data) {
+        return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
+    }
+
+    public static <T> Result<T> success(String message, T data) {
+        return new Result<>(ResultCode.SUCCESS.getCode(), message, data);
+    }
+
+    public static Result<?> failed() {
+        return new Result<>(ResultCode.COMMON_FAILED.getCode(), ResultCode.COMMON_FAILED.getMessage(), null);
+    }
+
+    public static Result<?> failed(String message) {
+        return new Result<>(ResultCode.COMMON_FAILED.getCode(), message, null);
+    }
+
+    public static Result<?> failed(Result errorResult) {
+        return new Result<>(errorResult.getCode(), errorResult.getMessage(), null);
+    }
+
+    public static Result<?> failed(Integer code, String message) {
+        return new Result<>(code, message, null);
+    }
 
 
 
@@ -30,12 +75,6 @@ public class Result<T> {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-    public Boolean getSuccess(){return success;}
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
     }
 
     public Integer getCode() {
