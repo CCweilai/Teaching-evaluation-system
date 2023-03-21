@@ -1,6 +1,6 @@
 package com.example.server.entity;
 
-public class Student {
+public class Teacher {
     private String id;
     private String password;
     private String name;
@@ -63,18 +63,5 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", age=" + age +
-                ", telephone='" + telephone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }
