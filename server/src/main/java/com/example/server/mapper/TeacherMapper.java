@@ -19,9 +19,11 @@ public interface TeacherMapper {
     public Teacher selectTeacherById(String id);
     //根据student的id查询password
     @Select("select password from teacher where id = #{id}")
-    public Teacher selectTeacherPasswordById(String id);
+    public String selectTeacherPasswordById(String id);
     //根据name查询信息
 
+    @Select("select * from teacher where id = #{id} and password = #{password}")
+    public Teacher login(String id,String password);
 
     //注册 增加
     @Insert("insert into teacher values (#{id},#{name},#{password}),#{sex},#{age},#{telephone},#{email}")

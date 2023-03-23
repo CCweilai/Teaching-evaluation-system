@@ -1,11 +1,10 @@
 package com.example.server.controller;
 
-
-import com.example.server.entity.Admin;
 import com.example.server.entity.Student;
 import com.example.server.mapper.StudentMapper;
 import com.example.server.utils.MD5Utils;
 import com.example.server.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +12,11 @@ import java.util.List;
 @RestController
 
 public class StudentController {
+    @Autowired
     StudentMapper studentMapper;
     @PostMapping("/student/register")
     public Result register(Student student){
-        Student studentExist = studentMapper.selectStudentPasswordById(student.getId());
+        Student studentExist = studentMapper.selectStudentById(student.getId());
         if(studentExist != null) {
             return Result.failed("admin账号已存在");
         }
@@ -29,6 +29,22 @@ public class StudentController {
             }
             else{
                 return Result.failed("注册失败");
+            }
+        }
+    }
+    @PostMapping("/student/login")
+    //登录student
+    public Result studentLogin(Student student){
+        Student studentExist = studentMapper.selectStudentById(student.getId());
+        if(studentExist == null){
+            return Result.failed("用户不存在，请注册");
+        }
+        else{
+            if(MD5Utils.code(student.getPassword())!=studentMapper.selectStudentPasswordById(student.getId())){
+                return Result.failed("用户名或密码错误");
+            }
+            else{
+                return Result.success("登陆成功",studentMapper.login(student.getId(),MD5Utils.code(student.getPassword())));
             }
         }
     }
