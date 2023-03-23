@@ -9,5 +9,4 @@ public interface ScheduleMapper {
     //根据开课id查询课程
     @Select("select * from schedule where id = #{schid}")
     public Schedule selectBySchid(int schid);
-
 }

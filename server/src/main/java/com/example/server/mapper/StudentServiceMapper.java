@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-
-import java.util.List;
 @Mapper
 public interface StudentServiceMapper {
     //通过schid查询课容量
@@ -21,11 +19,9 @@ public interface StudentServiceMapper {
     int pickCourse(SelectCourse selectCourse);
 
 
-
     //查询全部成绩
     @Select("select * from selectcourse where sid=#{sid} and schid = #{schid}")
     public SelectCourse selectGrade(String sid,int schid);
-
 
    //根据学生id查询已选课
     @Select("select * from schedule where id in(select schid from selectcourse where sid =#{sid})")

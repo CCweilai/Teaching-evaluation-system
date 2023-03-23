@@ -1,16 +1,11 @@
 package com.example.server.mapper;
-
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.example.server.entity.Admin;
 import org.apache.ibatis.annotations.*;
 
-
-import java.io.Serializable;
 import java.util.List;
 
 @Mapper
 public interface AdminMapper {
-
 
     //查询所有admin
     @Select("select * from admin")
