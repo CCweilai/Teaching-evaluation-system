@@ -1,26 +1,20 @@
 package com.example.server.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.util.List;
-
 public class SelectCourse {
-
-
-    private int id;
+    private Integer id;
     private String sid;
-    private int schid;
-    private int grade1;
-    private int grade2;
-    private int grade3;
-    private int grade4;
-    private int grade5;
+    private Integer schid;
+    private Integer grade1;
+    private Integer grade2;
+    private Integer grade3;
+    private Integer grade4;
+    private Integer grade5;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,51 +26,51 @@ public class SelectCourse {
         this.sid = sid;
     }
 
-    public int getSchid() {
+    public Integer getSchid() {
         return schid;
     }
 
-    public void setSchid(int schid) {
+    public void setSchid(Integer schid) {
         this.schid = schid;
     }
 
-    public int getGrade1() {
+    public Integer getGrade1() {
         return grade1;
     }
 
-    public void setGrade1(int grade1) {
+    public void setGrade1(Integer grade1) {
         this.grade1 = grade1;
     }
 
-    public int getGrade2() {
+    public Integer getGrade2() {
         return grade2;
     }
 
-    public void setGrade2(int grade2) {
+    public void setGrade2(Integer grade2) {
         this.grade2 = grade2;
     }
 
-    public int getGrade3() {
+    public Integer getGrade3() {
         return grade3;
     }
 
-    public void setGrade3(int grade3) {
+    public void setGrade3(Integer grade3) {
         this.grade3 = grade3;
     }
 
-    public int getGrade4() {
+    public Integer getGrade4() {
         return grade4;
     }
 
-    public void setGrade4(int grade4) {
+    public void setGrade4(Integer grade4) {
         this.grade4 = grade4;
     }
 
-    public int getGrade5() {
+    public Integer getGrade5() {
         return grade5;
     }
 
-    public void setGrade5(int grade5) {
+    public void setGrade5(Integer grade5) {
         this.grade5 = grade5;
     }
 }

@@ -4,7 +4,7 @@ public class Course {
     private String id;
     private String name;
     private String info;
-    private  int nature;
+    private Integer nature;
 
     public String getId() {
         return id;
@@ -30,11 +30,12 @@ public class Course {
         this.info = info;
     }
 
-    public int getNature() {
+    public Integer getNature() {
         return nature;
     }
 
-    public void setNature(int nature) {
+    public void setNature(Integer nature) {
         this.nature = nature;
     }
 }
+

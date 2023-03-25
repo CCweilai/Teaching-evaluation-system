@@ -6,6 +6,7 @@ import com.example.server.utils.MD5Utils;
 import com.example.server.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -15,7 +16,6 @@ public class AdminController {
     //注册admin
     @PostMapping("/admin/register")
     public Result adminRegister(Admin admin){
-        System.out.println(admin);
         Admin adminExist = adminMapper.selectByName(admin.getName());
         if(adminExist != null) {
             return Result.failed("admin账号已存在");
@@ -32,8 +32,9 @@ public class AdminController {
             }
         }
     }
-    @PostMapping("/admin/login")
+
     //登录admin
+    @PostMapping("/admin/login")
     public Result adminLogin(Admin admin){
         Admin adminExist = adminMapper.selectByName(admin.getName());
         if(adminExist == null){
@@ -48,6 +49,7 @@ public class AdminController {
             }
         }
     }
+
     //查询全部
     @GetMapping("/admin")
     public List getAdmin(){
@@ -56,25 +58,63 @@ public class AdminController {
 
     //根据id查询admin
     @GetMapping("/admin/{id}")
-    public List getAdminById(@PathVariable int id){
+    public Admin getAdminById(@PathVariable int id){
         return adminMapper.selectById(id);
     }
 
-    //添加admin
+    //添加admin 注册逻辑
     @PostMapping("/admin")
-    public String addAdmin(){
-        return "添加admin成功";
+    public String addAdmin(Admin admin){
+        Admin adminExist = adminMapper.selectByName(admin.getName());
+        if(adminExist!=null){
+            return "账号存在，无法添加";
+        }
+        else{
+            admin.setPassword(MD5Utils.code(admin.getPassword()));
+            int a = adminMapper.register(admin);
+            if(a==1){
+                return "添加成功";
+            }
+            else{
+                return "添加失败";
+            }
+        }
     }
 
     //更新admin
     @PutMapping("/admin")
-    public String updateAdmin(){
-        return "更新admin成功";
+    public String updateAdmin(Admin admin) {
+        Admin adminExit = adminMapper.selectById(admin.getId());
+        if (adminExit == null){
+            return "更改错误，不存原账户";
+        }
+        // 更新实体对象的属性值，同时保留原始值
+        Admin update_admin = adminMapper.selectById(admin.getId());
+        if (admin.getName() != null) {
+            update_admin.setName(admin.getName());
+        }
+        if (admin.getPassword() != null) {
+            update_admin.setPassword(MD5Utils.code(admin.getPassword()));
+        }
+
+        int a = adminMapper.updateAdmin(update_admin);
+        if(a==1){
+            return "更新admin成功";
+        }
+        else{
+            return "更新admin失败";
+        }
     }
 
     //根据id删除admin
     @DeleteMapping("/admin/{id}")
     public String deleteById(@PathVariable int id){
-        return "根据id删除admin";
+        int a = adminMapper.deleteAdminById(id);
+        if (a==1){
+            return "根据id删除admin成功";
+        }
+        else{
+            return "根据id删除admin失败";
+        }
     }
 }

@@ -18,7 +18,6 @@ public interface StudentServiceMapper {
     @Insert("insert into selectcourse(id,sid,schid) values (#{id},#{sid},#{schid})")
     int pickCourse(SelectCourse selectCourse);
 
-
     //查询全部成绩
     @Select("select * from selectcourse where sid=#{sid} and schid = #{schid}")
     public SelectCourse selectGrade(String sid,int schid);
@@ -26,4 +25,8 @@ public interface StudentServiceMapper {
    //根据学生id查询已选课
     @Select("select * from schedule where id in(select schid from selectcourse where sid =#{sid})")
     public List<Schedule> selectCourse(String sid);
+
+    //取消选课
+    @Delete("delete from selectcourse where schid = #{schid} and sid= #{sid}")
+    int deleteStudentCourse(Integer schid,String sid);
 }

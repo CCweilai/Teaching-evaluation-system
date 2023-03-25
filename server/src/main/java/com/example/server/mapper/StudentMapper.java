@@ -2,10 +2,7 @@ package com.example.server.mapper;
 
 import com.example.server.entity.Admin;
 import com.example.server.entity.Student;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -31,5 +28,7 @@ public interface StudentMapper {
     //根据id删除
     @Delete("delete from student where id = #{id}")
     int deleteStudentById(String id);
+    @Update("update student set name=#{name},password= #{password},sex=#{sex},age=#{age},telephone= #{telephone},email=#{email} where id =#{id}")
+    int updateStudent(Student student);
 
 }

@@ -3,10 +3,8 @@ package com.example.server.mapper;
 import com.example.server.entity.Schedule;
 import com.example.server.entity.SelectCourse;
 import com.example.server.entity.Student;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -32,5 +30,13 @@ public interface TeacherServiceMapper {
     //更改学生的成绩
     @Update("update selectcourse set grade1=#{grade1},grade2=#{grade2},grade3=#{grade3},grade4=#{grade4},grade5=#{grade5} where sid = #{sid} and schid=#{schid}")
     public int updateStudentGrade(SelectCourse selectCourse);
+
+    //根据学生id和选课id查询
+    @Select("select * from selectcourse where sid = #{sid} and schid = #{schid}")
+    public SelectCourse getDataBySchidAndSid(String sid,Integer schid);
+
+    //删除开课
+    @Delete("delete from schedule where tid = #{tid} and cid = #{cid}")
+    int deleteTeacherCourse(String tid,String cid);
 
 }

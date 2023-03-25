@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.entity.Student;
 import com.example.server.entity.Teacher;
 import com.example.server.mapper.TeacherMapper;
 import com.example.server.utils.MD5Utils;
@@ -47,6 +48,8 @@ public class TeacherController {
         }
     }
 
+
+
     //根据id查询teacher
     @GetMapping("/teacher/{id}")
     public Teacher SelectTeacherById(@PathVariable String id){
@@ -60,10 +63,34 @@ public class TeacherController {
 
     //更新teacher
     @PutMapping("/teacher")
-    public String updateTeacher(){
-        return "更新teacher";
+    public String updateTeacher(Teacher teacher){
+        Teacher update_teacher = teacherMapper.selectTeacherById(teacher.getId());
+        if (teacher.getName()!=null){
+            update_teacher.setName(teacher.getName());
+        }
+        if (teacher.getAge() != null){
+            update_teacher.setAge(teacher.getAge());
+        }
+        if (teacher.getSex() !=  null ){
+            update_teacher.setSex(teacher.getSex());
+        }
+        if (teacher.getTelephone()!=null){
+            update_teacher.setTelephone(teacher.getTelephone());
+        }
+        if (teacher.getEmail()!=null){
+            update_teacher.setEmail(teacher.getEmail());
+        }
+        if (teacher.getPassword()!=null){
+            update_teacher.setPassword(MD5Utils.code(teacher.getPassword()));
+        }
+        int a = teacherMapper.updateTeacher(update_teacher);
+        if(a==1){
+            return "更新成功";
+        }
+        else{
+            return"更新失败";
+        }
     }
-
     //根据id删除teacher
     @DeleteMapping("/teacher/{id}")
     public String deleteTeacherById(@PathVariable String id){

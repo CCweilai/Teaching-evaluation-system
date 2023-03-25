@@ -1,32 +1,18 @@
 package com.example.server.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-
-import java.util.List;
-
 public class Schedule {
-    private int id;
+    private Integer id;
     private String tid;
     private String cid;
-    private  String time;
+    private String time;
     private String info;
-    private int room;
+    private Integer room;
 
-    public int getRoom() {
-        return room;
-    }
-
-    public void setRoom(int room) {
-        this.room = room;
-    }
-    @TableField(exist = false)
-    private String sid;
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -60,5 +46,13 @@ public class Schedule {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Integer getRoom() {
+        return room;
+    }
+
+    public void setRoom(Integer room) {
+        this.room = room;
     }
 }

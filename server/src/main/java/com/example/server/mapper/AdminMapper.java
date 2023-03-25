@@ -12,7 +12,7 @@ public interface AdminMapper {
     public List<Admin> getAdmin();
     //根据id查询admin
     @Select("select * from admin where id = #{id}")
-    public List<Admin> selectById(int id);
+    public Admin selectById(int id);
     //根据name查询password
     @Select("select password from admin where name = #{name}")
     public String selectPasswordByName(String name);
@@ -29,8 +29,10 @@ public interface AdminMapper {
     //根据id删除
     @Delete("delete from admin where id = #{id}")
     int deleteAdminById(int id);
-    //修改
 
+    //修改 name,password
+    @Update("update admin set name=#{name},password=#{password} where id = #{id} ")
+    public int updateAdmin(Admin admin);
 
 
 }

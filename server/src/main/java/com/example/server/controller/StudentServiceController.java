@@ -3,6 +3,7 @@ package com.example.server.controller;
 import com.example.server.entity.Schedule;
 import com.example.server.entity.SelectCourse;
 import com.example.server.mapper.StudentServiceMapper;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,5 +56,16 @@ public class StudentServiceController {
     @PostMapping("/studentService/selectAllCourse")
     public List<Schedule> selectAllCourse(String sid){
         return studentServiceMapper.selectCourse(sid);
+    }
+
+    @Delete("/studentService/deleteStudentCourse")
+    public String deleteStudentCourse(Integer schid,String sid){
+        int a= studentServiceMapper.deleteStudentCourse(schid,sid);
+        if(a==1){
+            return "退课成功";
+        }
+        else{
+            return "退课失败";
+        }
     }
 }
